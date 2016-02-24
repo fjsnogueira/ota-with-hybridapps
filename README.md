@@ -1,5 +1,5 @@
-# TVML in tvOS
+# OTA (over-the-air) Updates with Hybrid Apps
 
-## does it work the 'hybrid way'?
+## Ever wanted to release your mobile app more quickly?
 
-p.s.: sorry for the 7.6 MB gif
+http://zwacky.github.io/ota-with-hybridapps
