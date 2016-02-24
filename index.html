@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Over-the-air (OTA) Updates with Ionic</title>
+
+		<meta name="description" content="Over-the-air (OTA) Updates with Ionic">
+		<meta name="author" content="Simon Wicki">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>
+						Ever wanted to release your mobile app more quickly?
+					</h1>
+				</section>
+
+				<section data-background="img/codepush-bg.png">
+					<h1>Over-the-air (OTA) Updates</h1>
+					<h3>
+						<br>
+						with <img src="./img/codepush.svg" alt="ionic" style="height: 50px; box-shadow: none; border: 0; background-color: transparent; vertical-align: text-bottom; margin-left: 20px; margin-right: 20px; position: relative; top: 5px;">
+					</h3>
+					<!-- <p>
+						<small>Simon Wicki (Twitter <a href="http://twitter.com/zwacky">@zwacky</a>)</small>
+					</p> -->
+				</section>
+
+				<section data-background="img/jw-bg.png">
+					<h2>#ME</h2>
+					<div style="float: left; width: 50%;" class="fragment">
+						<br>
+						<img src="./img/jw-mock.png" alt="JW mock" style="border: 0; background-color: transparent; box-shadow: none;">
+					</div>
+					<div style="float: right; width: 50%;" class="fragment">
+						<p>Simon Wicki (@zwacky)</p>
+						<p>Head of Frontend at <a href="https://www.justwatch.com">JustWatch.com</a></p>
+						<br>
+						<ul>
+							<li>legal streaming search engine</li>
+							<li>available in 9 countries (soon 10)</li>
+							<li>1M+ app downloads as of Feb '16</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<p>What can OTA do for you?</p>
+					<h2>Over The Air</h2>
+					<p>
+						<div style="width: 50%; float: left;" class="fragment">
+							<img src="./img/cycle-available.png" alt="OTA update available" style="height: 50vh;">
+						</div>
+						<span style="width: 50%; float: right;" class="fragment">
+							<p>
+								Update your App outside AppStore/Play Store
+							</p>
+							<ul>
+								<li>👍: Update templates, js, images, ... instantly</li>
+								<li>👍: No AppStore reviews</li>
+								<li>💩: No native alterations</li>
+							</ul>
+						</span>
+					</p>
+				</section>
+
+				<section>
+					<h3>Does AppStore allow it?</h3>
+					<p class="fragment">
+						Yes.
+					</p>
+					<p class="fragment">
+						But... Your app has to be doing still the same.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<p>What is available and what do they offer</p>
+						<h2>Services/Plugins</h2>
+					</section>
+
+					<section>
+
+						<p>
+							<img src="./img/ionic-deploy.png" alt="Ionic Deploy">
+						</p>
+
+						<ul>
+							<li>Currently in Alpha</li>
+							<li>Not recommended to use in production apps by ionic itself</li>
+							<li>Free while in Alpha</li>
+							<li><a href="http://docs.ionic.io/docs/deploy-overview">http://docs.ionic.io/docs/deploy-overview</a></li>
+						</ul>
+					</section>
+
+					<section>
+
+						<p>
+							<img src="./img/codepush.svg" alt="ionic" style="height: 100px; box-shadow: none; border: 0; background-color: transparent; vertical-align: text-bottom; margin-left: 20px; margin-right: 20px; position: relative; top: 5px;">
+						</p>
+
+						<ul>
+							<li>Currently in Beta (1.5.0-beta)</li>
+							<li>Free while in Beta</li>
+							<li>Also available for React Native</li>
+							<li>Open source</li>
+							<li>by Microsoft</li>
+							<li><a href="https://github.com/Microsoft/cordova-plugin-code-push">https://github.com/Microsoft/cordova-plugin-code-push</a></li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>
+							Summary
+						</h3>
+
+						<ul>
+							<li>Multi environments (stage, prod, ...)</li>
+							<li>Rollback mechanisms</li>
+							<ul>
+								<li>CodePush: native rollback</li>
+							</ul>
+							<li>Question of 'what stack'</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<p>How does it work?</p>
+						<h2>Life Cycle</h2>
+					</section>
+
+					<section data-background="img/cycle.png">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<p>In 3 steps</p>
+						<h2>CodePush Implementation</h2>
+					</section>
+					<section>
+						<h3>#1 Deployment Key</h3>
+						<p>config.xml</p>
+						<pre><code data-trim>
+<platform name="android">
+    <preference name="CodePushDeploymentKey" value="YOUR-ANDROID-DEPLOYMENT-KEY" />
+</platform>
+<platform name="ios">
+    <preference name="CodePushDeploymentKey" value="YOUR-IOS-DEPLOYMENT-KEY" />
+</platform>
+						</code></pre>
+						<br>
+						<p><strong>PROTIP:</strong> or set it programmatically for stage/prod OTA updates in JS</p>
+						<pre><code data-trim>
+window.codePush.checkForUpdate(
+	onUpdateCheck,
+	onCheckError,
+	isBetaTester() ? deployKeys.beta : deployKeys.prod
+);
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>#2 Security Policies</h3>
+
+						<p>config.xml</p>
+						<pre><code data-trim>
+<access origin="https://codepush.azurewebsites.net" />
+<access orogin="https://codepush.blob.core.windows.net" />
+						</code></pre>
+
+						<p>index.html</p>
+						<pre><code data-trim>
+<meta http-equiv="Content-Security-Policy" content="default-src https://codepush.azurewebsites.net 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>#3 JavaScript implementation</h3>
+
+						<pre><code data-trim>
+// sugar method that does *everything*
+codePush.sync();
+						</code></pre>
+
+					</section>
+
+					<section>
+						<h3>"Everything" means...</h3>
+
+						<ul>
+							<li>Dialog for user interaction</li>
+							<li>Download</li>
+							<li>Install</li>
+							<li>Tell that the installation was successful</li>
+							<li>Reload app</li>
+						</ul>
+
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<p>more work, more flexibility</p>
+						<h2>Manual Update</h2>
+
+						<!-- <img src="img/deployments.png" alt="CodePush Deployments" style="box-shadow: none; border: 0; background-color: transparent;"> -->
+					</section>
+
+					<section>
+						<h3>Install Modes</h3>
+
+						<ul>
+							<li>IMMEDIATE</li>
+							<li>ON_NEXT_RESTART</li>
+							<li>ON_NEXT_RESUME</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Possible Update Strategies</h3>
+						<ul>
+							<li>Regular Update</li>
+							<li>Stealth Update</li>
+							<li>Relentless Update</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Deployment</h2>
+						<img src="img/deployments.png" alt="CodePush Deployments" style="box-shadow: none; border: 0; background-color: transparent;">
+					</section>
+					<section>
+						<h3>Build ionic app</h3>
+
+						<pre><code data-trim>
+cordova prepare
+// or whatever you use to package your app.
+// basically to that point so that
+// `ionic run [platform]` doesn't fail.
+						</code></pre>
+
+						<br>
+
+						<h3>the packaged app will be built in:</h3>
+						<ul>
+							<li>./platforms/ios/www</li>
+							<li>./platforms/android/assets/www</li>
+						</ul>
+
+					</section>
+
+					<section>
+						<h3>Upload app with app version</h3>
+
+						<pre><code data-trim>
+code-push release justwatch ./platforms/ios/www 0.5.11 -d "ios-stage"
+						</code></pre>
+
+						<br>
+						<h3>options</h3>
+						<ul>
+							<li>--mandatory (will be inherited)</li>
+							<li>--description "descr"</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Greenlight the update</h3>
+
+						<pre><code data-trim>
+code-push promote justwatch ios-stage ios-prod
+						</code></pre>
+					</section>
+
+				</section>
+
+
+				<section>
+					<p>Breaking the app</p>
+					<h2>Rollback</h2>
+
+					<p class="fragment">
+						<ul>
+							<li>through CLI</li>
+							<li>natively by the plugin if update has failed</li>
+							<ul>
+								<li>codePush.notifyApplicationReady</li>
+							</ul>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<p>Ever wanted to release your mobile app more quickly?</p>
+					<h2>Now you know how</h2>
+					<br>
+					<br>
+					<p>Update finished. Thank you!</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
